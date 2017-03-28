@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+    <h:form>
+        <p:outputLabel value="Search:"/>
+        <p:autoComplete value="#{search.search}" completeMethod="#{search.autoComplete}"/>
+        <p:commandButton value="Search..." action="#{search.runSearch}" update="@form" ajax="true"/>
+        <p:outputLabel value="Result:"/>
+        <p:dataTable value="#{search.searchTorrents}" var="searchTorrent">
+            <p:column headerText="Name">
+                <h:commandLink value="#{searchTorrent.name}" action="details.xhtml"/>
+            </p:column>
+            <p:column headerText="Hash">
+                <h:outputText value="#{searchTorrent.md5Hash}" />
+            </p:column>
+            <p:column headerText="Magnet link">
+                <h:commandLink value="[icon]" action="#{search.download}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</ui:composition>

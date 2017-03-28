@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <ui:remove>
+        It's hard to use c:if here because if requires
+        information to be present at build time -> using
+        rendered attribues works fine
+    </ui:remove>
+        <p:panelGrid id="loginPanelGrid">
+            <p:row>
+                <!--different form for different actions and register should be
+                        a page-to-page navigation case, so use h:button which
+                        doesn't use a h:form -->
+                <h:form>
+                    <p:column rendered="#{!login.loggedIn}">
+                        <h:outputText value="Username:"/>
+                    </p:column>
+                    <p:column rendered="#{!login.loggedIn}">
+                        <h:inputText value="#{login.username}"/>
+                    </p:column>
+                    <p:column rendered="#{!login.loggedIn}">
+                        <h:outputText value="Password:"/>
+                    </p:column>
+                    <p:column rendered="#{!login.loggedIn}">
+                        <h:inputSecret value="#{login.password}"/>
+                    </p:column>
+                    <p:column rendered="#{!login.loggedIn}">
+                        <p:commandButton value="Login" action="#{login.login}" update="loginPanelGrid"/>                    
+                    </p:column>
+                </h:form>
+                <h:form>
+                    <p:column rendered="#{login.loggedIn}">
+                        <h:outputText value="Logged in as #{pageContext.request.userPrincipal}"/>
+                    </p:column>
+                    <p:column rendered="#{login.loggedIn}">
+                        <p:commandButton value="Logout" action="#{login.logout}" update="loginPanelGrid"/>
+                    </p:column>
+                </h:form>
+
+                <p:column rendered="#{!login.loggedIn}">
+                    <p:button value="Register" outcome="/register.xhtml"/>
+                </p:column>
+
+                <p:column rendered="#{login.loggedIn and not empty user.permissions}">
+                    <h:form>
+                        <p:commandButton value="Review torrent creation" action="reviewtorrentcreation.xhtml"/>
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <h:messages/>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+</ui:composition>

@@ -1,0 +1,5 @@
+target/
+linuxtracker2-jar/target/
+linuxtracker2-ejb/target/
+linuxtracker2-web/target/
+linuxtracker2-ear/target/

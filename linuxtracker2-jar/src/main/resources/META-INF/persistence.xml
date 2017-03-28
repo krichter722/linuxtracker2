@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="richtercloud_linuxtracker2-jar_jar_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <jta-data-source>jdbc/linuxtracker2</jta-data-source>
+    <class>richtercloud.linuxtracker2.jar.entities.AUser</class>
+    <class>richtercloud.linuxtracker2.jar.entities.Identifiable</class>
+    <class>richtercloud.linuxtracker2.jar.entities.Torrent</class>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+      <property name="eclipselink.target-server" value="Glassfish"/>
+      <!-- avoid non-severe NullPointerException being logged in GlasFish
+            <ref>https://java.net/jira/browse/GLASSFISH-21468f</ref>-->
+    </properties>
+  </persistence-unit>
+</persistence>
